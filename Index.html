@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics Universe</title>
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --primary: #4a00e0;
+            --secondary: #8e2de2;
+            --dark: #1a1a1a;
+            --light: #f4f4f9;
+            --white: #ffffff;
+            --text: #333333;
+            --border: #dddddd;
+            --success: #28a745;
+        }
+
+      -- Sign In Portal -->
+    <section id="login" class="section-page">
+        <div class="card" style="max-width: 500px; margin: 50px auto; text-align: center;">
+            <h2>Account Access</h2>
+            <p>Sign in to access your administrative dashboard and premium content.</p>
+            
+            <button class="google-btn" onclick="alert('Google Sign-In Authentication Flow Initiated')">
+                <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                Sign in with Google
+            </button>
+        </div>
+    </section>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation (SPA Tabs) */
+        nav {
+            background-color: var(--dark);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav button {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid transparent;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav button:hover, nav button.active {
+            border-color: var(--secondary);
+            background: rgba(142, 45, 226, 0.2);
+        }
+
+        /* Page Layout */
+        .page {
+            display: none;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 80vh;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography & Vibrant Styles */
+        .viral-title {
+            background: linear-gradient(to right, #ff007a, #7928ca, #00d2ff);
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 4.5em;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 2em;
+            margin: 30px 0 15px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+
+        .importance-box {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+            text-align: justify;
+            border-left: 5px solid var(--secondary);
+        }
+
+        /* Upload Sections */
+        .upload-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .upload-area {
+            border: 2px dashed var(--secondary);
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 8px;
+            background: #fafafa;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .upload-area:hover {
+            background: #f0ebf8;
+        }
+
+        .upload-area input[type="file"] {
+            display: none;
+        }
+
+        .upload-label {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .file-info {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Grid Layouts */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .viral-title { font-size: 2.5em; }
+            nav { flex-direction: column; text-align: center; }
+        }
+
+        /* Forms & Selects */
+        select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 40px 20px 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-content h3 { color: var(--secondary); margin-bottom: 15px; }
+        .footer-content p, .footer-content a { color: #ccc; text-decoration: none; margin-bottom: 10px; display: block; }
+        .footer-content a:hover { color: var(--white); }
+        .reviews { color: #ffc107; font-size: 1.2em; font-weight: bold; }
+        
+        .disclaimer {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #333;
+            font-size: 0.85em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <button class="tab-btn active" onclick="openPage('home')">Home</button>
+        <button class="tab-btn" onclick="openPage('gallery')">Gallery</button>
+        <button class="tab-btn" onclick="openPage('ignou')">IGNOU Portal</button>
+    </nav>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <h1 class="viral-title">Mathematics Universe</h1>
+        
+        <div class="importance-box">
+            <h3>The Power of Mathematics in Real Life</h3>
+            <p>Mathematics is the universal language that underpins the fabric of our reality. From managing personal finances, architectural design, and technological advancements, to understanding the vast mysteries of the cosmos, math is foundational. It cultivates critical thinking, enhances problem-solving capabilities, and empowers us to navigate and innovate in an increasingly complex world. Mathematics is not just about numbers; it's about understanding the logical structure of the universe.</p>
+        </div>
+
+        <h2 class="section-title">Front Page Uploads</h2>
+        
+        <div class="upload-card">
+            <h3>Main Hero Image</h3>
+            <div class="upload-area" onclick="document.getElementById('hero-img').click()">
+                <label class="upload-label">Select Image</label>
+                <p class="file-info">Supported formats: JPG, PNG, WEBP</p>
+                <input type="file" id="hero-img" accept="image/*" onchange="updateFileName(this)">
+                <p class="file-name"></p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Study Materials & Resources</h2>
+        
+        <div class="grid-2">
+            <div class="upload-card">
+                <h3>Important Formula PDF List</h3>
+                <div class="upload-area" onclick="document.getElementById('formula-pdf').click()">
+                    <label class="upload-label">Upload Formula PDFs</label>
+                    <p class="file-info">Format: PDF | Size limit displayed in MB</p>
+                    <input type="file" id="formula-pdf" accept=".pdf" multiple onchange="updateFileDetails(this)">
+                    <div class="file-name"></div>
+                </div>
+            </div>
+
+            <div class="upload-card">
+                <h3>NCERT Solution PDF Notes</h3>
+                <div class="upload-area" onclick="document.getElementById('ncert-pdf').click()">
+                    <label class="upload-label">Upload NCERT Notes</label>
+                    <p class="file-info">Format: PDF | Enterprise Capacity: Ready for large batch uploads (up to 100 GB volume provisioned)</p>
+                    <input type="file" id="ncert-pdf" accept=".pdf" multiple onchange="updateFileDetails(this)">
+                    <div class="file-name"></div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Conceptual Video Lectures</h2>
+        <div class="grid-2">
+            <div class="upload-card">
+                <h3>Horizontal Format (16:9)</h3>
+                <div class="upload-area" onclick="document.getElementById('vid-horizontal').click()">
+                    <label class="upload-label">Upload YouTube/Desktop Video</label>
+                    <p class="file-info">Format: MP4, MKV | Aspect Ratio: 16:9</p>
+                    <input type="file" id="vid-horizontal" accept="video/*" onchange="updateFileName(this)">
+                    <p class="file-name"></p>
+                </div>
+            </div>
+
+            <div class="upload-card">
+                <h3>Vertical Format (9:16)</h3>
+                <div class="upload-area" onclick="document.getElementById('vid-vertical').click()">
+                    <label class="upload-label">Upload Shorts/Reels Video</label>
+                    <p class="file-info">Format: MP4 | Aspect Ratio: 9:16</p>
+                    <input type="file" id="vid-vertical" accept="video/*" onchange="updateFileName(this)">
+                    <p class="file-name"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Page -->
+    <section id="gallery" class="page">
+        <h1 class="viral-title" style="font-size: 3em;">Colorful Gallery</h1>
+        
+        <div class="upload-card" style="text-align: center; max-width: 600px; margin: 0 auto 30px;">
+            <h3>Upload New Colorful Image</h3>
+            <div class="upload-area" onclick="document.getElementById('gallery-upload').click()">
+                <label class="upload-label">Choose Colorful Images</label>
+                <input type="file" id="gallery-upload" accept="image/*" multiple onchange="updateFileDetails(this)">
+                <div class="file-name"></div>
+            </div>
+        </div>
+
+        <div class="grid-3" id="gallery-preview">
+            <!-- Mock gallery items to show layout -->
+            <div style="background: #e0e0e0; height: 250px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #888;">Image Placeholder</div>
+            <div style="background: #e0e0e0; height: 250px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #888;">Image Placeholder</div>
+            <div style="background: #e0e0e0; height: 250px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #888;">Image Placeholder</div>
+        </div>
+    </section>
+
+    <!-- IGNOU Portal Page -->
+    <section id="ignou" class="page">
+        <h1 class="viral-title" style="font-size: 3em; background: linear-gradient(to right, #ff4b1f, #1fddff); -webkit-background-clip: text;">Indira Gandhi National Open University</h1>
+        
+        <div class="grid-2">
+            <div class="upload-card">
+                <h3>IGNOU Logo Upload</h3>
+                <div class="upload-area" onclick="document.getElementById('ignou-logo').click()">
+                    <label class="upload-label">Upload Official Logo</label>
+                    <input type="file" id="ignou-logo" accept="image/*" onchange="updateFileName(this)">
+                    <p class="file-name"></p>
+                </div>
+            </div>
+
+            <div class="upload-card">
+                <h3>Notifications Section</h3>
+                <div class="upload-area" onclick="document.getElementById('ignou-notif').click()">
+                    <label class="upload-label">Upload PDF Notification</label>
+                    <input type="file" id="ignou-notif" accept=".pdf" onchange="updateFileName(this)">
+                    <p class="file-name"></p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Previous Year Question Papers & Course Details</h2>
+        <div class="upload-card">
+            <div class="grid-3">
+                <div>
+                    <label><strong>Stream</strong></label>
+                    <select id="ignou-stream">
+                        <option>Science</option>
+                        <option>Arts</option>
+                        <option>Commerce</option>
+                    </select>
+                </div>
+                <div>
+                    <label><strong>Level</strong></label>
+                    <select id="ignou-level">
+                        <option>Undergraduate (UG)</option>
+                        <option>Postgraduate (PG)</option>
+                    </select>
+                </div>
+                <div>
+                    <label><strong>Course Code/Name</strong></label>
+                    <input type="text" placeholder="e.g., MTE-01">
+                </div>
+            </div>
+            <div class="upload-area" onclick="document.getElementById('ignou-pyq').click()" style="margin-top: 20px;">
+                <label class="upload-label">Upload Course Material / PYQ (PDF)</label>
+                <input type="file" id="ignou-pyq" accept=".pdf" multiple onchange="updateFileDetails(this)">
+                <div class="file-name"></div>
+            </div>
+        </div>
+
+        <h2 class="section-title">IGNOU Conceptual Videos</h2>
+        <div class="upload-card">
+            <div class="upload-area" onclick="document.getElementById('ignou-vid').click()">
+                <label class="upload-label">Upload Subject Video</label>
+                <p class="file-info">Horizontal or Vertical format</p>
+                <input type="file" id="ignou-vid" accept="video/*" onchange="updateFileName(this)">
+                <p class="file-name"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer & Disclaimer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3>Mathematics Universe</h3>
+                <p>Directed by Gaurav Kumar</p>
+                <p>Dedicated to providing top-tier mathematical resources, educational formulas, and conceptual clarity for all students.</p>
+            </div>
+            <div>
+                <h3>Contact Us</h3>
+                <p>📞 Phone: 9153706135</p>
+                <p>✉️ Email: mathematicsuniverse1@gmail.com</p>
+                <p>📍 Address: Ward no 6, Patehara bazar, post pharashani, West Champaran, Bihar, PIN: 845105</p>
+            </div>
+            <div>
+                <h3>Connect & Reviews</h3>
+                <p class="reviews">⭐ 4.7 Stars (100 Reviews)</p>
+                <a href="https://g.page/r/CTRYDUG47w7YEBI/review" target="_blank" rel="noopener">📝 Google Profile - Post a Review</a>
+                <a href="https://www.facebook.com/profile.php?id=61593586617934" target="_blank" rel="noopener">🌐 Facebook Profile</a>
+            </div>
+        </div>
+        <div class="disclaimer">
+            <strong>Disclaimer:</strong> The contents of this website (Mathematics Universe) are created and provided for educational and informational purposes only. The platform administrators are not responsible for copyright violations on files uploaded by users. Users must ensure they have the proper rights and permissions for any files, PDFs, or videos uploaded to this platform. By using this service, you agree to these terms.
+        </div>
+    </footer>
+
+    <!-- JavaScript for SPA and File UI -->
+    <script>
+        // Tab Navigation Logic
+        function openPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected page and activate button
+            document.getElementById(pageId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Single File Name Update
+        function updateFileName(input) {
+            const displayArea = input.parentElement.querySelector('.file-name');
+            if (input.files && input.files.length > 0) {
+                const file = input.files[0];
+                const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+                displayArea.innerHTML = `<span style="color:var(--success);">✓ Selected: ${file.name} (${sizeInMB} MB)</span>`;
+            } else {
+                displayArea.innerHTML = '';
+            }
+        }
+
+        // Multiple Files Detail Update (for PDFs and bulk uploads)
+        function updateFileDetails(input) {
+            const displayArea = input.parentElement.querySelector('.file-name');
+            if (input.files && input.files.length > 0) {
+                let html = '<ul style="list-style-type:none; margin-top:10px; color:var(--success); text-align:left;">';
+                let totalSize = 0;
+                
+                for(let i=0; i < input.files.length; i++) {
+                    let file = input.files[i];
+                    let sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+                    totalSize += parseFloat(sizeMB);
+                    html += `<li>✓ ${file.name} - <b>${sizeMB} MB</b></li>`;
+                }
+                html += `</ul><div style="margin-top:10px; font-weight:bold;">Total Upload Size: ${totalSize.toFixed(2)} MB</div>`;
+                displayArea.innerHTML = html;
+            } else {
+                displayArea.innerHTML = '';
+            }
+        }
+    </script>
+</body>
+</html>
+
+
